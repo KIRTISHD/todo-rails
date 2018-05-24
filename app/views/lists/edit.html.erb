@@ -1,6 +1,12 @@
-<h1>Editing Todo item</h1>
+<h1>Edit Todo item</h1>
+<br/>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= render 'form' %>
+<br/><br/>
 
-<%= link_to 'Show', @list %> |
+<% link_to 'Show', @list %>
 <%= link_to 'Back', lists_path %>

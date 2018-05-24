@@ -1,6 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<h1>My Todo Lists</h1>
 
 <table class="table table-bordered">
   
@@ -12,18 +9,32 @@
         <tr class="table-secondary">
           <td class="striker"><%= link_to list.description, edit_list_path(list) %><% list.description %></td>
           <td>
+            <%= form_for(list) do |f| %>
+              <%= f.text_field :description, type: 'hidden' %>
+              <%= f.check_box :completed, :checked => false, :style => 'visibility:hidden' %>
+              <%= f.submit "Uncross It", class: 'btn btn-outline-secondary btn-sm'%>
+            <% end %>
+          </td>
+          <td>
             <% link_to 'Show', list %>
-            
-            <%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% link_to 'Edit', edit_list_path(list) %>
+            <center><%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' } %></center>
           </td>
         </tr>
       <% else %>
         <tr>
           <td><%= link_to list.description, edit_list_path(list) %><% list.description %></td>
           <td>
+            <%= form_for(list) do |f| %>
+              <%= f.text_field :description, type: 'hidden' %>
+              <%= f.check_box :completed, :checked => true, :style => 'visibility:hidden' %>
+              <%= f.submit "Cross It", class: 'btn btn-outline-secondary btn-sm'%>
+            <% end %>
+         </td>
+          <td>
             <% link_to 'Show', list %>
-            
-            <%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% link_to 'Edit', edit_list_path(list) %>
+            <center><%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' } %></center>
           </td>
         </tr>
       <% end %>
@@ -31,6 +42,5 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'Add todo item', new_list_path, class: 'btn btn-primary' %>
+<%= link_to 'Delete Marked Items', home_trash_em_path,class:'btn btn-secondary', data: { confirm: 'Are you sure?' } %> | 
+<%= link_to 'Delete All Items', home_trash_all_path,class:'btn btn-secondary', data: { confirm: 'Are you sure?' } %> 
